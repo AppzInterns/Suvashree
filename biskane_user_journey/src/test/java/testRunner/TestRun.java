@@ -9,7 +9,7 @@ import cucumber.api.junit.Cucumber;
 @CucumberOptions(	
 		features = { "Features/Login.feature" },
 		glue ={"stepDefinitions"},
-		tags={"@BiskaneSignup"}
+		tags={"@BiskaneSignupPage"}
 	
 )
 

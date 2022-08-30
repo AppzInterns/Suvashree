@@ -159,18 +159,75 @@ public class steps {
         lp.formFields();
     
 }
-    @When("^User Dont enter data in First Name field$")
-    public void user_dont_enter_data_in_first_name_field() throws Throwable {
-        lp.firstName();
+    @When("^User enter data in First Name field$")
+    public void user_enter_data_in_first_name_field() throws Throwable {
+        lp.firstNamefield();
     }
-
-   
 
     @Then("^Verify the required validation message$")
     public void verify_the_required_validation_message() throws Throwable {
-      lp.validationMessage();
+        lp.validationMessage();
+    
     }
 
-    
-    
+    @When("^User dont enter data in First Name field$")
+    public void user_dont_enter_data_in_first_name_field() throws Throwable {
+        lp.dontEnterFirstName();
+    }
+
+    @When("^User enter more than 50 characters in first name field$")
+    public void user_enter_more_than_50_characters_in_first_name_field() throws Throwable {
+        lp.maxCharFirstName();
+    }
+
+    @When("^User enter blank space in first name field$")
+    public void user_enter_blank_space_in_first_name_field() throws Throwable {
+        lp.blankSpaceFirstName();
+    }
+
+    @When("^User dont enter data in Last Name field$")
+    public void user_dont_enter_data_in_last_name_field() throws Throwable {
+        lp.dontEnterLastName();
+    }
+
+    @When("^User enter more than 50 characters in last name field$")
+    public void user_enter_more_than_50_characters_in_last_name_field() throws Throwable {
+        lp.maxCharLastName();
+    }
+
+    @When("^User enter blank space in last name field$")
+    public void user_enter_blank_space_in_last_name_field() throws Throwable {
+        lp.blankSpaceLastName();
+    }
+
+    @Then("^Verify the error message$")
+    public void verify_the_error_message() throws Throwable {
+        lp.errorMessage();
+    }
+
+    @Then("^Verify the error message field$")
+    public void verify_the_error_message_field() throws Throwable {
+        lp.errorMessageField();
+    }
+
+    @Then("^Verify the first name blank space error message$")
+    public void verify_the_first_name_blank_space_error_message() throws Throwable {
+        lp.firstNameBlankSpace();
+    }
+
+    @Then("^Verify the error message below Last Name$")
+    public void verify_the_error_message_below_last_name() throws Throwable {
+        lp.verifyErrorLastName();
+    }
+
+    @Then("^Verify the last name field error message$")
+    public void verify_the_last_name_field_error_message() throws Throwable {
+        lp.verifyErrorMessageField();
+    }
+
+    @Then("^Verify the last name blank space error message$")
+    public void verify_the_last_name_blank_space_error_message() throws Throwable {
+        lp.blankSpaceLastNameError();
+    }
+
     }

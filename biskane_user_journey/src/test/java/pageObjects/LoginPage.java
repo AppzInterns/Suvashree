@@ -2,6 +2,7 @@ package pageObjects;
 
 import java.util.List;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -76,13 +77,35 @@ public class LoginPage {
 
 	@FindBy(xpath="//*[@id=\"chek\"]")
 	WebElement clickOnAgree;
-	
+
 	@FindBy(xpath="//button[@type=\"Submit\"]")
 	WebElement signinButton;
-	
+
 	@FindBy(xpath="//input[@id=\"phone\"]")
 	WebElement contactNo;
 
+	@FindBy(xpath="//button[@id='btn_send']")
+	WebElement submitButton;
+
+	@FindBy(xpath="//span[normalize-space()='Only alphabets are allowed']")
+	WebElement validationMessage;
+
+	@FindBy(xpath="//div[@class='col-lg-6 loginbox']//div[2]//span[1]")
+	WebElement errorMessage;
+	
+    @FindBy(xpath="//span[normalize-space()='Firstname must not exceed 50 characters']")
+    WebElement maxCharFirstName;
+    
+    @FindBy(xpath="//*[@id=\"main\"]/section/div/div/div[2]/form/div[3]/span")
+    WebElement lastNameErrorMsg;
+    
+    @FindBy(xpath="//span[normalize-space()='Lastname must not exceed 50 characters']")
+    WebElement maxCharLastNameError;
+    
+    @FindBy(xpath="//span[normalize-space()='Only alphabets are allowed']")
+    WebElement blankSpaceLastNameError;
+    
+    
 	/**
 	 * This method is to print url
 	 * @throws InterruptedException 
@@ -286,34 +309,125 @@ public class LoginPage {
 		clickOnAgree.click();
 
 	}
-	
+
 	public boolean buttonClickable(WebElement signinButton, WebDriver Idriver) 
-    {
-        try{
-            WebDriverWait wait = new WebDriverWait(Idriver, 20);
-            wait.until(ExpectedConditions.elementToBeClickable(signinButton));
-            return true;
-        }
-        catch (Exception e){
-            return false;
-        }
-    }
+	{
+		try{
+			WebDriverWait wait = new WebDriverWait(Idriver, 20);
+			wait.until(ExpectedConditions.elementToBeClickable(signinButton));
+			return true;
+		}
+		catch (Exception e){
+			return false;
+		}
+	}
 	public void contactNo() {
 		contactNo.sendKeys("8043005570");
-		
+
 	}
 	public boolean contactNoField() {
 		WebDriverWait wait = new WebDriverWait(Idriver, 30);
 		return wait.until(ExpectedConditions.visibilityOf(contactNo)).isDisplayed();
 	}
-	public void firstName() {
+
+	public void firstNamefield() {
+		//Thread.sleep(5000);
+		firstName.sendKeys("suvashree123");
+		submitButton.click();
+
+
+	}
+	public void validationMessage() throws InterruptedException{
+		Thread.sleep(3000);
+		String actualError=validationMessage.getText();
+		String expectedError="Only alphabets are allowed";
+		Assert.assertEquals(actualError,expectedError);
+		Assert.assertTrue(expectedError.contains("Only alphabets are allowed"));
+		System.out.println("Test completed");
+
+	}
+	public void dontEnterFirstName() {
 		firstName.sendKeys("");
-		
+		submitButton.click();
 	}
-	public void validationMessage() {
-		
-		
+	public void errorMessage() throws InterruptedException {
+		Thread.sleep(3000);
+		String actualError=errorMessage.getText();
+		String expectedError="This field is required";
+		Assert.assertEquals(actualError,expectedError);
+		Assert.assertTrue(expectedError.contains("This field is required"));
+		System.out.println("This field is required");
+
 	}
+	public void maxCharFirstName() {
+		firstName.clear();
+		firstName.sendKeys("abcdeffffffffdddddddddsdotscddhnhfddffghjhjioiuytrt");
+
+	}
+	public void errorMessageField() throws InterruptedException {
+		Thread.sleep(3000);
+		String actualError=maxCharFirstName.getText();
+		String expectedError="Firstname must not exceed 50 characters";
+		Assert.assertEquals(actualError,expectedError);
+		Assert.assertTrue(expectedError.contains("Firstname must not exceed 50 characters"));
+		System.out.println("Firstname must not exceed 50 characters");
+
+	}
+	public void blankSpaceFirstName() {
+		firstName.clear();
+		firstName.sendKeys("suvashree swain");
+
+	}
+	public void firstNameBlankSpace() throws InterruptedException {
+		Thread.sleep(3000);
+		String actualError=validationMessage.getText();
+		String expectedError="Only alphabets are allowed";
+		Assert.assertEquals(actualError,expectedError);
+		Assert.assertTrue(expectedError.contains("Only alphabets are allowed"));
+		System.out.println("Only alphabets are allowed");
+
+	}
+	public void dontEnterLastName() {
+		lastName.sendKeys("");
+
+	}
+	public void verifyErrorLastName() {
+		String actualError=lastNameErrorMsg.getText();
+		String expectedError="This field is required";
+		Assert.assertEquals(actualError,expectedError);
+		Assert.assertTrue(expectedError.contains("This field is required"));
+		System.out.println("This field is required");
+
+	}
+	public void maxCharLastName() {
+		lastName.clear();
+		lastName.sendKeys("abcdeffffffffdddddddddsdotscddhnhfddffghjhjioiuytrt");
+
+
+	}
+	public void verifyErrorMessageField() throws InterruptedException {
+		Thread.sleep(3000);
+		String actualError=maxCharLastNameError.getText();
+		String expectedError="Lastname must not exceed 50 characters";
+		Assert.assertEquals(actualError,expectedError);
+		Assert.assertTrue(expectedError.contains("Lastname must not exceed 50 characters"));
+		System.out.println("Lastname must not exceed 50 characters");
+		
+
+	}
+	public void blankSpaceLastName() {
+		lastName.clear();
+		lastName.sendKeys("suvashree swain");
+
+	}
+	public void blankSpaceLastNameError() {
+		String actualError=blankSpaceLastNameError.getText();
+		String expectedError="Only alphabets are allowed";
+		Assert.assertEquals(actualError,expectedError);
+		Assert.assertTrue(expectedError.contains("Only alphabets are allowed"));
+		System.out.println("Only alphabets are allowed");
 	
+
 	}
-	
+
+}

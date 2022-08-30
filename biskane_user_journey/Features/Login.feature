@@ -34,15 +34,27 @@ Feature: Biskane user journey
  When Enter data in to Contact Number field
  Then Verify data is entering or not
  
- #@BiskaneSignupPage
+ @BiskaneSignupPage
  Scenario: Verify validation message when user dont enter data in First Name field.
  Given Lunch chrome browser
  When User open biskane url 
  And Mouse hover on sign up menu
  When Click on Customer Signup link in Sign up dropdown
  Then Verify user is redirected to Customer Sign Up screen
- When User Dont enter data in First Name field
- #Then Verify the required validation message
+ When User dont enter data in First Name field
+ Then Verify the error message
+ When User enter more than 50 characters in first name field
+ Then Verify the error message field
+ When User enter blank space in first name field
+ Then Verify the first name blank space error message
+ When User enter data in First Name field
+ Then Verify the required validation message
+ When User dont enter data in Last Name field
+ Then Verify the error message below Last Name
+ When User enter more than 50 characters in last name field
+ Then Verify the last name field error message
+ When User enter blank space in last name field
+ Then Verify the last name blank space error message
 
  
  
